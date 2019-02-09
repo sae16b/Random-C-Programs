@@ -24,9 +24,9 @@ void removeEvenDuplicates(char str[],int n){
 	}
 }
 int main(){
-	  char str[]="you got beautiful eyes";
-    removeAlternateDuplicates(str,24);
-    printf("%s\n",str );
+	char str[]="you got beautiful eyes";
+	removeAlternateDuplicates(str,24);
+	printf("%s\n",str );
 	
 	return 0;
 
