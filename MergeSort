@@ -1,0 +1,61 @@
+#include <iostream>
+#include <sstream>
+
+void copyArr(int* newArr, int* oldArr, int begin, int end) {
+	for (int i = begin; i < end; ++i) {
+		newArr[i-begin] = oldArr[i];
+	}
+}
+
+void printArray(int arr[], int n);
+
+int* mergeSort(int arr[], int n) {
+	if (n == 1) {
+		return arr;
+	}
+
+	int* left = new int[n / 2];
+	copyArr(left, arr, 0, n / 2); // left side of original array
+	int* right = new int[n - n / 2];
+	copyArr(right, arr, n - n / 2, n); // right side of original array
+	
+	left = mergeSort(left, n / 2); // left side sorted
+	right = mergeSort(right, n - n / 2); // right side sorted
+	
+	int currIndex = 0;
+	int leftPivot = 0, rightPivot = 0;
+	
+	while (currIndex < n) {
+		if (leftPivot < n / 2 && ( left[leftPivot] < right[rightPivot] || rightPivot >= (n-n/2) )) {
+			arr[currIndex] = left[leftPivot++];
+		}
+		else {
+			arr[currIndex] = right[rightPivot++];
+		}
+		++currIndex;
+	}
+	return arr;
+}
+
+void printArray(int* arr, int n) {
+	std::stringstream ss;
+	for (int i = 0; i < n; ++i) {
+		ss << arr[i] << ", ";
+	}
+	std::cout << ss.str() << std::endl;
+}
+
+int main() {
+	std::cout << "Start program" << std::endl;
+	int n = 8;
+	int testArray[] = {5, 8, 23, 76, 1, 2, 5, -10};
+	// Output: -10, 1, 2, 5, 5, 8, 23, 76
+
+	printArray(testArray, 8);
+	mergeSort(testArray, 8);
+	printArray(testArray, 8);
+
+	std::cin >> n; // keeping cmd prompt from disappearing
+
+	return 0;
+}
