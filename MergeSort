@@ -17,16 +17,23 @@ int* mergeSort(int arr[], int n) {
 	int* left = new int[n / 2];
 	copyArr(left, arr, 0, n / 2); // left side of original array
 	int* right = new int[n - n / 2];
-	copyArr(right, arr, n - n / 2, n); // right side of original array
-	
+	copyArr(right, arr, n / 2, n); // right side of original array
+	std::cout << "Left: ";
+	printArray(left, n/2);
+	std::cout << "Right: ";
+	printArray(right, n / 2);
 	left = mergeSort(left, n / 2); // left side sorted
-	right = mergeSort(right, n - n / 2); // right side sorted
+	right = mergeSort(right, n / 2); // right side sorted
+	std::cout << "Left sorted: ";
+	printArray(left, n / 2);
+	std::cout << "Right sorted: ";
+	printArray(right, n / 2);
 	
 	int currIndex = 0;
 	int leftPivot = 0, rightPivot = 0;
 	
 	while (currIndex < n) {
-		if (leftPivot < n / 2 && ( left[leftPivot] < right[rightPivot] || rightPivot >= (n-n/2) )) {
+		if (leftPivot < n / 2 && ( left[leftPivot] < right[rightPivot] || rightPivot >= (n/2) )) {
 			arr[currIndex] = left[leftPivot++];
 		}
 		else {
@@ -49,11 +56,12 @@ int main() {
 	std::cout << "Start program" << std::endl;
 	int n = 8;
 	int testArray[] = {5, 8, 23, 76, 1, 2, 5, -10};
+	//int testArray[] = { 1, 11, 16, 17, 19 };
 	// Output: -10, 1, 2, 5, 5, 8, 23, 76
 
-	printArray(testArray, 8);
-	mergeSort(testArray, 8);
-	printArray(testArray, 8);
+	printArray(testArray, n);
+	mergeSort(testArray, n);
+	printArray(testArray, n);
 
 	std::cin >> n; // keeping cmd prompt from disappearing
 
