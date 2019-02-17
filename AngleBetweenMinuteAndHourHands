@@ -1,0 +1,28 @@
+#include <iostream>
+
+double abs(double d) {
+    return d < 0 ? -d : d;
+}
+
+double getAngle(double minute, double hour) {
+    double fullRot = 360.0;
+    double fullMinutes = 60;
+    double fullHours = 12;
+    minute = minute < fullMinutes ? minute : 0;
+    hour = hour < fullHours ? hour : 0;
+    
+    double minuteAngle = fullRot*(minute/fullMinutes);
+    double hourAngle = fullRot*(hour/fullHours);
+    
+    double delta = hourAngle - minuteAngle;
+    
+    return delta > 180 ? delta - 180 : delta;
+}
+
+int main() {
+	double minute = 60;
+	double hour = 5;
+	std::cout << "Angle: " << getAngle(minute, hour);
+	
+	return 0;
+}
